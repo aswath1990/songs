@@ -150,7 +150,7 @@
             tile.appendChild(flipCard);
 
             const audio = new Audio(`https://raw.githubusercontent.com/aswath1990/audio/main/tile${i}.mp3`);
-            };
+            audio.preload = 'auto';
             audio.preload = 'auto';
 
             audio.addEventListener('error', () => {
