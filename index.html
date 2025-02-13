@@ -150,6 +150,9 @@
             tile.appendChild(flipCard);
 
             const audio = new Audio(`https://aswath1990.github.io/songs/tile${i}.mp3`);
+            audio.onerror = () => {
+                audio.src = `https://aswath1990.github.io/songs/tile${i}.MP3`;
+            };
             audio.preload = 'auto';
 
             audio.addEventListener('error', () => {
