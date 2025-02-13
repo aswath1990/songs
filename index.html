@@ -80,11 +80,11 @@
         const countdownDisplay = document.getElementById('countdown');
         const downloadButton = document.getElementById('downloadButton');
 
-        const UNLOCK_INTERVAL = 120;
-        const unlockOrder = [8, 1, 5, 9, 2, 6, 10, 3, 7, 11];
+        const UNLOCK_INTERVAL = 180;
+        const unlockOrder = [3, 7, 11];
         let unlockIndex = 0;
 
-        const DEPLOYMENT_TIMESTAMP = new Date().getTime();
+        const DEPLOYMENT_TIMESTAMP = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
 
         let currentAudio = null;
 
@@ -122,6 +122,11 @@
         const intervalId = setInterval(updateCountdown, 1000);
 
         for (let i = 0; i < rows * cols; i++) {
+            if ([0, 1, 2, 4, 5, 6, 8, 9, 10].includes(i)) {
+                setTimeout(() => {
+                    document.querySelector(`.tile[data-index='${i}']`).style.visibility = 'visible';
+                }, 0);
+            }
             const tile = document.createElement('div');
             tile.className = 'tile';
             tile.dataset.index = i;
