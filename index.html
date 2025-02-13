@@ -84,7 +84,7 @@
         const unlockOrder = [8, 1, 5, 9, 2, 6, 10, 3, 7, 11];
         let unlockIndex = 0;
 
-        const DEPLOYMENT_TIMESTAMP = new Date('2025-02-10T11:30:00-08:00').getTime();
+        const DEPLOYMENT_TIMESTAMP = new Date().getTime();
 
         let currentAudio = null;
 
@@ -105,7 +105,7 @@
         function updateCountdown() {
             const currentTime = new Date().getTime();
             const elapsedSeconds = Math.floor((currentTime - DEPLOYMENT_TIMESTAMP) / 1000);
-            const nextUnlockTime = DEPLOYMENT_TIMESTAMP + (unlockIndex + 1) * UNLOCK_INTERVAL * 1000;
+            const nextUnlockTime = DEPLOYMENT_TIMESTAMP + unlockIndex * UNLOCK_INTERVAL * 1000;
             const countdown = Math.max(0, Math.floor((nextUnlockTime - currentTime) / 1000));
 
             const hours = Math.floor(countdown / 3600);
@@ -114,7 +114,7 @@
 
             countdownDisplay.textContent = `My Next Sweet Memory Will Show In: ${hours}h ${minutes}m ${seconds}s`;
 
-            if (countdown === 0) {
+            if (countdown <= 0) {
                 unlockNextTile();
             }
         }
