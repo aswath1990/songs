@@ -80,11 +80,11 @@
         const countdownDisplay = document.getElementById('countdown');
         const downloadButton = document.getElementById('downloadButton');
 
-        const UNLOCK_INTERVAL = 180;
+        const UNLOCK_INTERVAL = 7200;
         const unlockOrder = [3, 7, 11];
         let unlockIndex = 0;
 
-        const DEPLOYMENT_TIMESTAMP = new Date().getTime();
+        const DEPLOYMENT_TIMESTAMP = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
 
         let currentAudio = null;
 
