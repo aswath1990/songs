@@ -80,16 +80,24 @@
         const countdownDisplay = document.getElementById('countdown');
         const downloadButton = document.getElementById('downloadButton');
 
-        const UNLOCK_INTERVAL = 7200;
-        const unlockOrder = [3, 7, 11];
+        const UNLOCK_INTERVAL = 7200; // 2 hours in seconds // 2 hours per tile unlock
+        const unlockOrder = [3, 7, 11]; // Tiles unlock in sequence every 2 hours // Unlock tile 3 first, then tile 7 after 2 hours, then tile 11 after another 2 hours
         let unlockIndex = 0;
 
-        const DEPLOYMENT_TIMESTAMP = new Date().getTime();
+        const DEPLOYMENT_TIMESTAMP = new Date().getTime(); // Reference current PST time // Reference current PST time
 
         let currentAudio = null;
 
         function unlockNextTile() {
             if (unlockIndex < unlockOrder.length) {
+                const nextTile = unlockOrder[unlockIndex];
+                setTimeout(() => {
+                    document.querySelector(`.tile[data-index='${nextTile}']`).style.visibility = 'visible';
+                    unlockIndex++;
+                }, unlockIndex * UNLOCK_INTERVAL * 1000);
+            }
+                const nextUnlockTime = DEPLOYMENT_TIMESTAMP + (unlockIndex + 1) * UNLOCK_INTERVAL * 1000;
+                if (new Date().getTime() >= nextUnlockTime) {
                 const nextTile = unlockOrder[unlockIndex];
                 document.querySelector(`.tile[data-index='${nextTile}']`).style.visibility = 'visible';
                 unlockIndex++;
